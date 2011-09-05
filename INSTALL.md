@@ -102,4 +102,4 @@ Your web app should now be operational.
 
 Note that the programs `gatordata-httpd` and `gatordata-processor` are written in the Move programming language (like JavaScript but simpler). [Learn more at movelang.org](http://movelang.org/).
 
-If everything works, **continue by reading [WORKFLOW.md](https://github.com/rsms/ec2-webapp/blob/master/WORKFLOW.md#readme)**
+If everything works, **continue by reading [WORKFLOW.md](https://github.com/hirenj/gator-data/blob/master/WORKFLOW.md#readme)**
