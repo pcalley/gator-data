@@ -28,7 +28,7 @@ GROUP=www-data
 
 # Node.js
 MOVE_PROGRAM=/usr/local/bin/move
-MOVE_SCRIPT=/var/gatordata/bin/gatordata-httpd.mv
+MOVE_SCRIPT=/var/gatordata/bin/gatordata-httpd
 MOVE_ARGS="$MOVE_PROGRAM"
 
 # Daemon supervisor config

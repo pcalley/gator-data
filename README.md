@@ -14,7 +14,7 @@ This is a template I use to quickly set up Node.js-backed web apps on Amazon EC2
 
 This template enables a very smooth, simple and scalable workflow
 
-- When developing locally, the single command `bin/gatordata-httpd.mv` runs your web server and takes care of serving static files
+- When developing locally, the single command `bin/gatordata-httpd` runs your web server and takes care of serving static files
 - When deploying changes (after a git push), `gatordata-update restart` deploys changes and restarts services on your server
 - Rolling back the server to an earlier version is a simple as `gatordata-update restart v0.1.2`
 
