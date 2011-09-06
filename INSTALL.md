@@ -36,7 +36,7 @@ Node.js:
     mkdir src
     git clone https://github.com/joyent/node.git src/node
     cd src/node
-    # Optionally: git checkout v0.4.3
+    git checkout v0.4.11
     ./configure
     JOBS=2 make
     sudo make install
