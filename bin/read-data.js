@@ -1,6 +1,22 @@
 #!/usr/bin/env node
 
-var argv = require('optimist').argv;
+/*
+File format should be
+
+IDENTIFIER,{ ... JSON ...}
+IDENTIFIER,{ ... JSON ...}
+
+In UTF8 format
+
+*/
+
+
+
+
+var argv =  require('optimist')
+            .usage('Load data into the cache\nUsage: $0 --file [file] --reader [Reader class] --date YYYY/MM/DD')
+            .demand(['file','reader'])
+            .argv;
 
 var tools = require('../gator/script_tools.js');
 var events = require('events'),
