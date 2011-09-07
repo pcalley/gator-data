@@ -3,16 +3,69 @@
 tools = require('../gator/script_tools.js');
 
 MASCP = require('../gator/dist/js/maschup.services.js');
+
+var resource_map = {
+    'tair'      : MASCP.TairReader,
+    'atchloro'  : MASCP.AtChloroReader,
+    'atpeptide' : MASCP.AtPeptideReader,
+    'pep2pro'   : MASCP.AtProteomeReader,
+    'gelmap'    : MASCP.GelMapReader,
+    'interpro'  : MASCP.InterproReader,
+    'p3db'      : MASCP.P3dbReader,
+    'phosphat'  : MASCP.PhosphatReader,
+    'ppdb'      : MASCP.PpdbReader,
+    'promex'    : MASCP.PromexReader,
+    'rippdb'    : MASCP.RippdbReader,
+    'nssnps'    : MASCP.SnpReader    
+}
+
 MASCP.events.once('ready',function() {
     MASCP.Service.BeginCaching();
-    var http = require('http');
-    http.createServer(function (req, res) {
-        // Regexp check the AGI
-        var agi = req.url.replace('/','');
-        (new MASCP.TairReader()).retrieve(agi,function(err) {
-            res.writeHead(200, {'Content-Type': 'text/plain'});
-            res.end(this.result.getSequence());
+    var express = require('express'),
+        app = express.createServer();
+
+    app.get('/data/*',function(req,res,next) {
+        res.header('Content-type', 'application/json');
+        next();
+    });
+
+    app.get('/data/history/:resource/:date/:agi',function(req,res,next) {
+        var clazz = resource_map[req.param('resource')];
+        var date = new Date(Date.parse(req.param('date')+' UTC'));
+        MASCP.Service.SetMaximumAge(date);
+        (new clazz()).retrieve(req.param('agi'),function(err) {
+            console.log(this.result);
+            if (! this.result || ! this.result._raw_data || ! this.result._raw_data.retrieved) {
+                res.send({"error" : "No data"},404);
+                return;
+            }
+            if (this.result._raw_data.retrieved.getTime() != date.getTime()) {
+                var actual = this.result._raw_data.retrieved;
+                console.log("redirecting to "+actual);
+                var daystring = actual.getUTCDate();
+                if (daystring < 10) {
+                    daystring = '0'+daystring.toString();
+                }
+                var monthstring = actual.getUTCMonth()+1;
+                if (monthstring < 10) {
+                    monthstring = '0'+monthstring.toString();
+                }
+                res.redirect("/data/history/"+req.param('resource')+'/'+actual.getUTCFullYear()+'-'+monthstring+'-'+daystring+'/'+req.param('agi'));
+            } else {
+                res.send(this.result ? this.result._raw_data : {},200);
+            }
         });
-    }).listen(3000, "127.0.0.1");
+    });
+    
+    app.get('/data/latest/:resource/:agi',function(req,res,next) {
+        var clazz = resource_map[req.param('resource')];
+        MASCP.Service.SetMaximumAge(new Date());
+        (new clazz()).retrieve(req.param('agi'),function(err) {
+            res.send(this.result ? this.result._raw_data : {},200);
+        });
+    });
+
+
+    app.listen(3000, "127.0.0.1");
     console.log('Server running at http://127.0.0.1:3000/');
 });
