@@ -33,7 +33,7 @@ MASCP.events.once('ready',function() {
         var clazz = resource_map[req.param('resource')];
         var date = new Date(Date.parse(req.param('date')+' UTC'));
         MASCP.Service.SetMaximumAge(date);
-        (new clazz()).retrieve(req.param('agi'),function(err) {
+        (new clazz(null,null)).retrieve(req.param('agi'),function(err) {
             console.log(this.result);
             if (! this.result || ! this.result._raw_data || ! this.result._raw_data.retrieved) {
                 res.send({"error" : "No data"},404);
