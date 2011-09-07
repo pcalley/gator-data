@@ -48,7 +48,7 @@ MASCP.events.once('ready',function() {
     var date = argv.date ? new Date(Date.parse(argv.date + " 0:00 GMT")) : new Date();
     var classname = argv.reader;
     var retrieve_func = function(current_agi,cback) {
-        if (current_agi === null) {
+        if (current_agi === null || typeof current_agi == 'undefined') {
             cback.call(this);
         }
         var current_data = this._data;
@@ -83,7 +83,8 @@ MASCP.events.once('ready',function() {
                 reader.retrieve(null, function() {
                     if (data.length > 0) {
                         var row = data.shift();
-                        this.retrieve(row[0],arguments.callee,row[1]);
+                        this._data = row[1];
+                        this.retrieve(row[0],arguments.callee);
                     } else if (data.length == 0) {
                         end_func();
                     }
