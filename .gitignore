@@ -1,2 +1,3 @@
 etc/myapp/config.js
 ssl/ssl.key
+cached.db
