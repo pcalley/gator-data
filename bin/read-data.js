@@ -47,15 +47,14 @@ MASCP = require('../gator/dist/js/maschup.services.js');
 MASCP.events.once('ready',function() {
     var date = argv.date ? new Date(Date.parse(argv.date + " 0:00 GMT")) : new Date();
     var classname = argv.reader;
-    var current_agi = null;
-    var current_data = null;
-    var retrieve_func = function(agi,cback) {
+    var retrieve_func = function(current_agi,cback) {
+        if (current_agi === null) {
+            cback.call(this);
+        }
+        var current_data = this._data;
         var data_block = JSON.parse(current_data);
         data_block.retrieved = date;
         this.agi = current_agi;
-        current_agi = this.agi;
-//        this._dataReceived({});
-//        this._dataReceived(current_data);
         this._dataReceived(data_block);
         data_block = {};
         cback.call(this);
@@ -81,24 +80,19 @@ MASCP.events.once('ready',function() {
             var end_func = MASCP.Service.BulkOperation();
             if (argv.file) {
                 var data = read_csv(argv.file);
-                var row = data.shift();
-                current_agi = row[0];
-                current_data = row[1];
-                reader.retrieve(current_agi, function() {
+                reader.retrieve(null, function() {
                     if (data.length > 0) {
-                        row = data.shift();
-                        current_agi = row[0];
-                        current_data = row[1];
-                        this.retrieve(current_agi,arguments.callee);
+                        var row = data.shift();
+                        this.retrieve(row[0],arguments.callee,row[1]);
                     } else if (data.length == 0) {
                         end_func();
                     }
                 });
             } else {
                 get_stdin(function(line) {
-                    current_agi = line[0];
-                    current_data = line[1];
-                    reader.retrieve(line[0], function() { });
+                    var rdr = make_new_reader();
+                    rdr._data = line[1];
+                    rdr.retrieve(line[0], function() { });
                 }, function() {
                     end_func();
                 });
