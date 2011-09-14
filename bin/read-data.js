@@ -103,3 +103,5 @@ MASCP.events.once('ready',function() {
         }
     }
 });
+
+MASCP.events.emit('ready');
