@@ -60,16 +60,30 @@ MASCP.events.once('ready',function() {
         });
     });
     
-    app.get('/data/latest/:resource/:agi',function(req,res,next) {
-        var clazz = resource_map[req.param('resource')];
+    app.get('/data/latest/gator',function(req,res,next) {
+        var resource = req.query.service;
+        var agi = req.query.agi || req.query.id;
+        get_latest(agi,resource,res);
+    });
+
+    var get_latest = function(agi,resource,res) {
+        var clazz = resource_map[resource];
+        if ( ! clazz)  {
+            res.send({"error" : "No service"}, 404);
+            return;
+        }
         MASCP.Service.SetMaximumAge(new Date());
-        (new clazz()).retrieve(req.param('agi'),function(err) {
+        (new clazz()).retrieve(agi,function(err) {
             if (this.result._raw_data && this.result._raw_data.nodeName) {
                 res.send({ "error" : "XML data"},200);
             } else {
                 res.send(this.result ? this.result._raw_data : {},200);
             }
-        });
+        });        
+    }
+    
+    app.get('/data/latest/:resource/:agi',function(req,res,next) {
+        get_latest(req.param('agi'), req.param('resource'),res);
     });
 
 
