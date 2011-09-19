@@ -38,7 +38,7 @@ MASCP.events.once('ready',function() {
             return;
         }
         (new clazz(null,null)).retrieve(req.param('agi'),function(err) {
-            if (! this.result || ! this.result._raw_data || ! this.result._raw_data.retrieved) {
+            if (! this.result || this.result === null || ! this.result._raw_data || ! this.result._raw_data.retrieved) {
                 res.send({"error" : "No data"},404);
                 return;
             }
@@ -72,10 +72,10 @@ MASCP.events.once('ready',function() {
             res.send({"error" : "No service"}, 404);
             return;
         }
-        MASCP.Service.SetMaximumAge(new Date());
+        MASCP.Service.SetMaximumAge(0);
         (new clazz()).retrieve(agi,function(err) {
-            if (this.result._raw_data && this.result._raw_data.nodeName) {
-                res.send({ "error" : "XML data"},200);
+            if (this.result && this.result._raw_data && this.result._raw_data.nodeName) {
+                res.send({ "error" : "XML data"},200);                
             } else {
                 res.send(this.result ? this.result._raw_data : {},200);
             }
