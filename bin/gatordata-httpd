@@ -77,7 +77,7 @@ MASCP.events.once('ready',function() {
             if (this.result && this.result._raw_data && this.result._raw_data.nodeName) {
                 res.send({ "error" : "XML data"},200);                
             } else {
-                res.send(this.result ? this.result._raw_data : {},200);
+                res.send(this.result ? this.result._raw_data : {"error" : "No data"},200);
             }
         });        
     }
