@@ -55,8 +55,11 @@ MASCP.events.once('ready',function() {
         var data_block = JSON.parse(current_data);
         data_block.retrieved = date;
         this.agi = current_agi;
+        this.result = {};
+        this.result._raw_data = data_block;
         this._dataReceived(data_block);
         data_block = {};
+        this.result = {};
         cback.call(this);
     };
     
@@ -69,6 +72,7 @@ MASCP.events.once('ready',function() {
                 var rdr = new clazz();
                 rdr.retrieve = retrieve_func;
                 rdr._dataReceived = function() {
+                    return true;
                 };
                 MASCP.Service.CacheService(rdr);
                 return rdr;
