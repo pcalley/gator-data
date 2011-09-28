@@ -92,7 +92,7 @@ MASCP.events.once('ready',function() {
         MASCP.Service.SetMaximumAge(0);
         (new clazz()).retrieve(agi,function(err) {
             if (err || this.result && this.result._raw_data && this.result._raw_data.nodeName) {
-                res.send({ "error" : err || "XML data"},200);                
+                res.send(err.error ? { "error" : err.error } : { "error" : err },200);
             } else {
                 res.send(this.result ? this.result._raw_data : {"error" : "No data"},200);
             }
