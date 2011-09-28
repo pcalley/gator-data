@@ -16,6 +16,7 @@ var resource_map = {
     'ppdb'      : MASCP.PpdbReader,
     'promex'    : MASCP.PromexReader,
     'rippdb'    : MASCP.RippdbReader,
+    'suba'      : MASCP.SubaReader,
     'nssnps'    : MASCP.SnpReader    
 }
 
@@ -24,10 +25,21 @@ MASCP.events.once('ready',function() {
     var express = require('express'),
         app = express.createServer();
 
-    app.get('/data/*',function(req,res,next) {
-        res.header('Content-type', 'application/json');
-        next();
+    app.configure(function() {
+        app.use(express.bodyParser()); 
     });
+
+    var data_headers = function(req,res,next) {
+        res.header('Content-type', 'application/json');
+        res.header('Access-Control-Allow-Headers','x-requested-with');
+        res.header('Access-Control-Max-Age','1728000');
+        res.header('Access-Control-Allow-Origin','*');
+        res.header('Access-Control-Allow-Methods','*');        
+        next();
+    }
+
+    app.post('/data/*',data_headers);
+    app.get('/data/*',data_headers);
 
     app.get('/data/history/:resource/:date/:agi',function(req,res,next) {
         var clazz = resource_map[req.param('resource')];
@@ -65,6 +77,11 @@ MASCP.events.once('ready',function() {
         var agi = req.query.agi || req.query.id;
         get_latest(agi,resource,res);
     });
+    app.post('/data/latest/gator',function(req,res,next) {
+        var resource = req.body.service;
+        var agi = req.body.agi || req.body.id;
+        get_latest(agi,resource,res);
+    });
 
     var get_latest = function(agi,resource,res) {
         var clazz = resource_map[resource];
@@ -74,8 +91,8 @@ MASCP.events.once('ready',function() {
         }
         MASCP.Service.SetMaximumAge(0);
         (new clazz()).retrieve(agi,function(err) {
-            if (this.result && this.result._raw_data && this.result._raw_data.nodeName) {
-                res.send({ "error" : "XML data"},200);                
+            if (err || this.result && this.result._raw_data && this.result._raw_data.nodeName) {
+                res.send({ "error" : err || "XML data"},200);                
             } else {
                 res.send(this.result ? this.result._raw_data : {"error" : "No data"},200);
             }
