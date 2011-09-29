@@ -27,8 +27,13 @@ MASCP.events.once('ready',function() {
 
     app.configure(function() {
         app.use(express.bodyParser());
+        app.use(express.static(__dirname + '/../www'));
         app.use(express.static(__dirname + '/../gator/dist'));
         app.use(app.router);
+    });
+
+    app.get("/", function(req, res) {
+      res.redirect("/index.html");
     });
 
     var data_headers = function(req,res,next) {
