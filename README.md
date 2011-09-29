@@ -21,3 +21,8 @@ This template enables a very smooth, simple and scalable workflow
 > Here's a guide on getting started with Amazon EC2: <http://rsms.me/2011/03/23/ec2-wep-app-template.html>
 
 **Let's get started!** Head over to [INSTALL.md](https://github.com/hirenj/gator-data/blob/master/INSTALL.md#readme)
+
+
+## Building ##
+
+npm install

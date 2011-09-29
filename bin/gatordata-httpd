@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 
-tools = require('../gator/script_tools.js');
-
-MASCP = require('../gator/dist/js/maschup.services.js');
+MASCP = require('mascp-jstools');
 
 var resource_map = {
     'tair'      : MASCP.TairReader,
