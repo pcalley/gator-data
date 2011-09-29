@@ -26,7 +26,9 @@ MASCP.events.once('ready',function() {
         app = express.createServer();
 
     app.configure(function() {
-        app.use(express.bodyParser()); 
+        app.use(express.bodyParser());
+        app.use(express.static(__dirname + '/../gator/dist'));
+        app.use(app.router);
     });
 
     var data_headers = function(req,res,next) {
