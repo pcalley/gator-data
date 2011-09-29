@@ -1,0 +1,48 @@
+{
+   "name": "gator-data",
+   "version": "1.0.0",
+   "homepage" : "http://hirenj.github.com/gator-data/",
+   "description": "GATOR web server",
+   "keywords": [
+       "bioinformatics",
+       "node",
+       "javascript" 
+   ],
+   "maintainers": [
+       {
+           "name": "Hiren Joshi",
+           "email": "",
+           "web": "" 
+       } 
+   ],
+   "licenses": [
+       {
+           "type": "GPLv2",
+           "url": "http://www.example.org/licenses/gpl.html" 
+       } 
+   ],
+   "repositories": [
+       {
+           "type": "git",
+           "url": "https://hirenj@github.com/hirenj/gator-data.git" 
+       } 
+   ],
+   "dependencies": {
+       "express" : "2.4.x",
+       "mascp-jstools" : "https://github.com/hirenj/mascp-jstools/tarball/develop"
+   },
+   "main" : "bin/gatordata-httpd",
+   "bin" : {
+       "httpd" : "bin/gator-httpd"
+   },
+   "implements": ["mascp-jstools-1.0","cli"],
+   "os": ["linux", "macos", "win"],
+   "cpu": ["x86", "ppc", "x86_64"],
+   "engines": ["v8", "node >= 0.4.11"],
+   "directories": {
+       "lib": "js/lib",
+       "bin": "local/binaries",
+       "jars": "extlib/java" 
+   },
+   "private" : "true"
+}
