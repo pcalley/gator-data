@@ -79,13 +79,19 @@ MASCP.events.once('ready',function() {
     
     app.get('/data/latest/gator',function(req,res,next) {
         var resource = req.query.service;
-        var agi = req.query.agi || req.query.id;
+        var agi = req.query.agi || req.query.acc;
         get_latest(agi,resource,res);
     });
     app.post('/data/latest/gator',function(req,res,next) {
         var resource = req.body.service;
-        var agi = req.body.agi || req.body.id;
+        var agi = req.body.agi || req.body.acc;
         get_latest(agi,resource,res);
+    });
+
+    app.get('/data/latest/gator/:acc',function(req,res,next) {
+        var resource = req.query.service;
+        var acc = req.param('acc') || req.query.acc || req.query.agi;
+        get_latest(acc,resource,res);        
     });
 
     var get_latest = function(agi,resource,res) {
