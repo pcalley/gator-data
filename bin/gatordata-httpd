@@ -101,7 +101,7 @@ MASCP.events.once('ready',function() {
             return;
         }
         MASCP.Service.SetMaximumAge(0);
-        (new clazz()).retrieve(agi,function(err) {
+        (new clazz(null,null)).retrieve(agi,function(err) {
             if (err || this.result && this.result._raw_data && this.result._raw_data.nodeName) {
                 res.send(err.error ? { "error" : err.error } : { "error" : err },200);
             } else {
