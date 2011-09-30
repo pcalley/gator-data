@@ -5,7 +5,7 @@ var READER_CONF = (function() {
             continue;
         }
         vals[arguments[i]] = arguments[i+1];
-        vals[arguments[i]].url = arguments[i] === MASCP.AtChloroReader ? '/data/latest/atchloro/' : '/data/latest/gator';
+        vals[arguments[i]].url = ((vals[arguments[i]].url || arguments[i].SERVICE_URL).indexOf('?') >= 0) ? '/data/latest/gator' : '/data/latest/gator/';
     }
     return vals;
 })(
@@ -101,7 +101,6 @@ var READER_CONF = (function() {
                             }
                             document.getElementById('tissue_tags').updateTags();
                         },
-        'url'           : 'http://gator.masc-proteomics.org/proxy.pl',
         'layers'        : ['phosphat_experimental']
     },
     MASCP.RippdbReader ,  {
@@ -146,7 +145,6 @@ var READER_CONF = (function() {
         'nicename'      : 'PPDB',
         'error_url'     : 'http://ppdb.tc.cornell.edu',
         'success_url'   : 'http://ppdb.tc.cornell.edu/?refagi=',
-        'url'           : 'http://gator.masc-proteomics.org/proxy.pl',
         'result'        : function() {
                                 if (this.result.getPeptides().length > 0) {
                                     jQuery('#ppdb_placeholder').show();
@@ -228,7 +226,6 @@ var READER_CONF = (function() {
         'nicename'      : 'P3DB',
         'error_url'     : 'http://p3db.org',
         'success_url'   : 'http://p3db.org',
-        'url'           : 'http://gator.masc-proteomics.org/proxy.pl',
         'result'        : function() {
                           },
         'layers'        : ['p3db_experimental'],
@@ -237,7 +234,6 @@ var READER_CONF = (function() {
     MASCP.SnpReader, {
         'definition'    : MASCP.SnpReader,
         'nicename'      : 'Snps',
-        'url'           : 'http://snp.jbei.org/snps.pl',
         'result'        : function() {            
         },
         'layers'        : ['insertions_controller','insertions']
