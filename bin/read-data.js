@@ -18,7 +18,6 @@ var argv =  require('optimist')
             .demand(['reader'])
             .argv;
 
-var tools = require('../gator/script_tools.js');
 var events = require('events'),
     fs = require('fs'),
     carrier = require('carrier'),
@@ -43,7 +42,7 @@ var get_stdin = function(cback,endcback) {
     })
 };
 
-MASCP = require('../gator/dist/js/maschup.services.js');
+MASCP = require('mascp-jstools');
 MASCP.events.once('ready',function() {
     var date = argv.date ? new Date(Date.parse(argv.date + " 0:00 GMT")) : new Date();
     var classname = argv.reader;
