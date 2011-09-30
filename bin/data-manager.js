@@ -119,6 +119,7 @@ MASCP.events.once('ready',function() {
         MASCP.Service.SetMaximumAge(date);
         MASCP.Service.CachedAgis(clazz,function(ids) {
             ids.forEach(function(id) {
+                // Set the endpoint URL to a null value so that it will never retrieve data
                 (new clazz(null,null).retrieve(id,function(err) {
                     if ( ! err && this.result ) {
                         var data = this.result._raw_data || {};
