@@ -33,10 +33,22 @@ MASCP.events.once('ready',function() {
         var total = ids.length;
         process.stdout.write("Retrieving data for "+classname+" running "+MASCP.Service.MAX_REQUESTS+" concurrent requests\n\n");
         setTimeout(function() {
+            if (process.memoryUsage().heapUsed > (500*1000*1000)) {
+                if (argv.verbose) {
+                    process.stderr.write("Memory usage too high - waiting for GC to happen");
+                }
+                setTimeout(arguments.callee,500);
+                return;
+            }
+            
             if (ids.length > 0 && current_set.length == 0) {
                 current_set = ids.splice(0,MASCP.Service.MAX_REQUESTS);
                 current_set.forEach(function(id) {
                     (new crawl_clazz().retrieve(id,function(err) {
+                        if (this.result) {
+                            this.result._raw_data = null;
+                            this.result = null;
+                        }
                         count++;
                         process.stdout.write("\033[1A Processed: "+count+"/"+total+" ids\n");
                         current_set.shift();
@@ -52,6 +64,10 @@ MASCP.events.once('ready',function() {
             }
             if (ids.length > 0) {
                 setTimeout(arguments.callee,500);
+            } else {
+                if (argv.verbose) {
+                    process.stderr.write("Finished\n\n");
+                }
             }
         },500);
     });
