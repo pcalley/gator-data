@@ -101,7 +101,7 @@ MASCP.events.once('ready',function() {
             });
         } else {
             get_stdin(function(line) {
-                var rdr = make_new_reader();
+                var rdr = make_new_reader(clazz);
                 rdr._data = line[1];
                 rdr.retrieve(line[0], function() { });
             }, function() {
