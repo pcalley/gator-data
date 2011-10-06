@@ -517,22 +517,6 @@ jQuery(document).ready(function() {
             this.retrieve();
         });
     
-        jQuery(MASCP.renderer).bind('resultsRendered',function(e,reader) {
-            if (reader.__class__ != MASCP.AtProteomeReader) {
-                return;
-            }
-        
-            // Do the selection just for atproteome at the moment
-            // while bugs are ironed out
-            MASCP.getGroup('atproteome').eachLayer(function() {
-                jQuery(this).bind('click',function(e,oe,start,finish) {
-                    MASCP.renderer.select(start,finish);
-                    e.stopPropagation();
-                });
-            });
-        
-            jQuery(MASCP.renderer).unbind('resultsRendered',arguments.callee);
-        });
     };
     
     jQuery(MASCP.renderer).bind('resultsRendered',rrend);
