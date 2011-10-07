@@ -27,7 +27,7 @@ GROUP=www-data
 #RELOAD_SIGNAL=1
 
 # Node.js
-MOVE_PROGRAM=/usr/local/bin/move
+MOVE_PROGRAM=/usr/local/bin/node
 MOVE_SCRIPT=/var/gatordata/bin/gatordata-httpd
 MOVE_ARGS="$MOVE_PROGRAM"
 
