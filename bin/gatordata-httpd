@@ -15,6 +15,7 @@ var resource_map = {
     'promex'    : MASCP.PromexReader,
     'rippdb'    : MASCP.RippdbReader,
     'suba'      : MASCP.SubaReader,
+    'ArbitraryData' : MASCP.ArbitraryDataReader,
     'nssnps'    : MASCP.SnpReader    
 }
 
@@ -47,14 +48,14 @@ MASCP.events.once('ready',function() {
     app.get('/data/*',data_headers);
 
     app.get('/data/history/:resource/:date/:agi',function(req,res,next) {
-        var clazz = resource_map[req.param('resource')];
+        var service = service_object(req);
         var date = new Date(Date.parse(req.param('date')+' UTC'));
         MASCP.Service.SetMaximumAge(date);
-        if ( ! clazz)  {
+        if ( ! service)  {
             res.send({"error" : "No service"}, 404);
             return;
         }
-        (new clazz(null,null)).retrieve(req.param('agi'),function(err) {
+        service.retrieve(req.param('agi'),function(err) {
             if (! this.result || this.result === null || ! this.result._raw_data || ! this.result._raw_data.retrieved) {
                 res.send({"error" : "No data"},404);
                 return;
@@ -78,30 +79,41 @@ MASCP.events.once('ready',function() {
     });
     
     app.get('/data/latest/gator',function(req,res,next) {
-        var resource = req.query.service;
         var agi = req.query.agi || req.query.acc;
-        get_latest(agi,resource,res);
+        get_latest(agi,service_object(req),res);
     });
     app.post('/data/latest/gator',function(req,res,next) {
-        var resource = req.body.service;
         var agi = req.body.agi || req.body.acc;
-        get_latest(agi,resource,res);
+        get_latest(agi,service_object(req),res);
     });
 
     app.get('/data/latest/gator/:acc',function(req,res,next) {
-        var resource = req.query.service;
         var acc = req.param('acc') || req.query.acc || req.query.agi;
-        get_latest(acc,resource,res);        
+        get_latest(acc,service_object(req),res);        
     });
 
-    var get_latest = function(agi,resource,res) {
+    var service_object = function(req) {
+        req.query = req.query || {};
+        req.body = req.body || {};
+        var resource = req.param('resource') || req.query.service || req.body.service;
         var clazz = resource_map[resource];
-        if ( ! clazz)  {
+        if ( ! clazz ) {
+            return;
+        }
+        var obj = new clazz(null,null);
+        if (clazz == MASCP.ArbitraryDataReader) {
+            obj = obj._extend(req.query.dataset || req.body.dataset);
+        }
+        return obj;
+    };
+
+    var get_latest = function(agi,service,res) {
+        if ( ! service)  {
             res.send({"error" : "No service"}, 404);
             return;
         }
         MASCP.Service.SetMaximumAge(0);
-        (new clazz(null,null)).retrieve(agi,function(err) {
+        service.retrieve(agi,function(err) {
             if (err || this.result && this.result._raw_data && this.result._raw_data.nodeName) {
                 res.send(err.error ? { "error" : err.error } : { "error" : err },200);
             } else {
@@ -111,7 +123,7 @@ MASCP.events.once('ready',function() {
     }
     
     app.get('/data/latest/:resource/:agi',function(req,res,next) {
-        get_latest(req.param('agi'), req.param('resource'),res);
+        get_latest(req.param('agi'), service_object(req), res);
     });
 
 

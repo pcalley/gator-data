@@ -116,6 +116,13 @@ var READER_CONF = (function() {
                         },
         'layers'        : ['prippdb_experimental']
     },
+    MASCP.ArbitraryDataReader , {
+        'definition'    : MASCP.ArbitraryDataReader,
+        'nicename'      : 'Other data',
+        'result'        : function() {},
+        'placeholder'   : true,
+        'layers'        : ['arbitrary_datasets']
+    },
     MASCP.PromexReader, { 
         'definition'    : MASCP.PromexReader,
         'nicename'      : 'ProMEX',
