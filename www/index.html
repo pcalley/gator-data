@@ -14,32 +14,12 @@
     </script>
     
     <script type="text/javascript" src="js/maschup.min.js"></script>
+
+    <script type="text/javascript">
+      // We should try to load data from the local server.
+      MASCP.LOCALSERVER = true;
+    </script>
     
-    <!-- <script type="text/javascript" src="js/maschup.services.min.js"></script> -->
-
-
-    <!-- <script type="text/javascript" src="js/lib/TagVisualisation.js"></script>
-
-    <script type="text/javascript" src="js/json-2.js"></script>
-    <script type="text/javascript" src="js/bean.js"></script>
-    <script type="text/javascript" src="js/lib/MascpService.js"></script>
-    <script type="text/javascript" src="js/lib/AtProteomeReader.js"></script>
-    <script type="text/javascript" src="js/lib/AtPeptideReader.js"></script>
-    <script type="text/javascript" src="js/lib/AtChloroReader.js"></script>    
-    <script type="text/javascript" src="js/lib/PhosphatReader.js"></script>
-    <script type="text/javascript" src="js/lib/PromexReader.js"></script>
-    <script type="text/javascript" src="js/lib/SubaReader.js"></script>
-    <script type="text/javascript" src="js/lib/RippdbReader.js"></script>
-    <script type="text/javascript" src="js/lib/PpdbReader.js"></script>
-    <script type="text/javascript" src="js/lib/TairReader.js"></script>
-    <script type="text/javascript" src="js/lib/UserdataReader.js"></script>
-    
-
-    <script type="text/javascript" src="js/lib/gomap.js"></script>
-    <script type="text/javascript" src="js/lib/SequenceRenderer.js"></script>
-    <script type="text/javascript" src="js/lib/CondensedSequenceRenderer.js"></script>
- -->
-
     <script type="text/javascript" charset="utf-8" src="http://code.jquery.com/jquery-1.4.1.min.js"></script>
 
     <script type="text/javascript" src="js/jquery-ui-1.7.2.min.js"></script>
@@ -227,7 +207,7 @@
         
         MASCP.renderer.refresh();
         
-        var reader = new MASCP.TairReader(agi,'/data/latest/gator');
+        var reader = new MASCP.TairReader(agi,MASCP.LOCALSERVER ? '/data/latest/gator' : null);
         reader.bind('resultReceived',function() {
             if (this.result.getSequence() == null || this.result.getSequence() == '') {
                 document._screen.hide();

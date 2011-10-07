@@ -5,7 +5,9 @@ var READER_CONF = (function() {
             continue;
         }
         vals[arguments[i]] = arguments[i+1];
-        vals[arguments[i]].url = ((vals[arguments[i]].url || arguments[i].SERVICE_URL).indexOf('?') >= 0) ? '/data/latest/gator' : '/data/latest/gator/';
+        if (MASCP.LOCALSERVER) {        
+            vals[arguments[i]].url = ((vals[arguments[i]].url || arguments[i].SERVICE_URL).indexOf('?') >= 0) ? '/data/latest/gator' : '/data/latest/gator/';
+        }
     }
     return vals;
 })(
