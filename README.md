@@ -19,7 +19,7 @@ when you're trying to bootstrap your own install of GATOR
 
     curl --silent 'https://s3.amazonaws.com/gator-data/MASCP.TairReader.txt' | bin/data-manager.js --reader MASCP.TairReader
     curl --silent 'https://s3.amazonaws.com/gator-data/MASCP.SnpReader.txt' | bin/data-manager.js --reader MASCP.SnpReader
-    curl --silent 'https://s3.amazonaws.com/gator-data/MASCP.InterproReader.txt' | bin/data-manager.js --reader MACSP.InterproReader
+    curl --silent 'https://s3.amazonaws.com/gator-data/MASCP.InterproReader.txt' | bin/data-manager.js --reader MASCP.InterproReader
     
 For more options for reading data dump files see
 
