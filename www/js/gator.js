@@ -350,7 +350,10 @@ jQuery(document).ready(function() {
     
     var rrend = function(e,reader) {
         if (rendering_readers && rendering_readers.length > 0) {
-            rendering_readers.splice(rendering_readers.indexOf(reader),1);
+            var an_index =rendering_readers.indexOf(reader);
+            if (an_index >= 0) {
+                rendering_readers.splice(an_index,1);
+            }
             if (rendering_readers.length > 0) {                
                 return;
             }
