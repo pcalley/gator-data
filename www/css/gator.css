@@ -378,6 +378,12 @@ h1, h2 {
         background-repeat: no-repeat;
         background-position: left center;
     }
+    #links li.error {
+        background-image: url(img/green.png);
+        background-repeat: no-repeat;
+        background-position: left center;
+    }
+
     
     #user_container {
         height: 128px;
