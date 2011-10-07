@@ -20,6 +20,19 @@ when you're trying to bootstrap your own install of GATOR
     curl --silent 'https://s3.amazonaws.com/gator-data/MASCP.TairReader.txt' | bin/data-manager.js --reader MASCP.TairReader
     curl --silent 'https://s3.amazonaws.com/gator-data/MASCP.SnpReader.txt' | bin/data-manager.js --reader MASCP.SnpReader
     curl --silent 'https://s3.amazonaws.com/gator-data/MASCP.InterproReader.txt' | bin/data-manager.js --reader MASCP.InterproReader
+    curl --silent 'https://s3.amazonaws.com/gator-data/MASCP.AtChloroReader-11-09-30.txt' | bin/data-manager.js --reader MASCP.AtChloroReader --date 2011/09/30
+    curl --silent 'https://s3.amazonaws.com/gator-data/MASCP.AtPeptideReader.txt' | bin/data-manager.js --reader MASCP.AtPeptideReader
+    curl --silent 'https://s3.amazonaws.com/gator-data/MASCP.AtProteomeReader-11-10-03.txt' | bin/data-manager.js --reader MASCP.AtProteomeReader --date 2011/10/03
+    curl --silent 'https://s3.amazonaws.com/gator-data/MASCP.GelMapReader-11-09-30.txt' | bin/data-manager.js --reader MASCP.GelMapReader --date 2011/09/30
+    curl --silent 'https://s3.amazonaws.com/gator-data/MASCP.P3dbReader-11-09-30.txt' | bin/data-manager.js --reader MASCP.P3dbReader --date 2011/09/30
+    curl --silent 'https://s3.amazonaws.com/gator-data/MASCP.PhosphatReader-11-09-30.txt' | bin/data-manager.js --reader MASCP.PhosphatReader --date 2011/09/30
+    curl --silent 'https://s3.amazonaws.com/gator-data/MASCP.PpdbReader-11-10-04.txt' | bin/data-manager.js --reader MASCP.PpdbReader --date 2011/10/04
+    curl --silent 'https://s3.amazonaws.com/gator-data/MASCP.RippdbReader.txt' | bin/data-manager.js --reader MASCP.RippdbReader
+    curl --silent 'https://s3.amazonaws.com/gator-data/MASCP.SubaReader-11-09-30.txt' | bin/data-manager.js --reader MASCP.SubaReader --date 2011/09/30
+    
+If you're loading this on an EC2 instance, you'll need to sudo to do this:
+
+    curl --silent ... | sudo su www-data -c "bin/data-manager.js --reader ..."
     
 For more options for reading data dump files see
 
