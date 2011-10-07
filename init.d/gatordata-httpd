@@ -21,6 +21,7 @@ NAME=gatordata-httpd
 DESC="gatordata HTTP server"
 RUNDIR=/var/run/gatordata
 LOGDIR=/var/log/gatordata
+CWDIR=/var/gatordata
 SCRIPTNAME=/etc/init.d/$NAME
 USER=www-data
 GROUP=www-data
@@ -75,6 +76,7 @@ do_start() {
     start-stop-daemon --start --quiet --pidfile $PIDFILE \
                       --exec $SUPERVISOR --chuid $USER:$GROUP -- \
                       $SUPERVISOR_ARGS \
+                      --chdir=$CWDIR \
                       --name=$NAME --pidfile=$PIDFILE \
                       --stdout=$LOGDIR/$NAME.log \
                       --stderr=$LOGDIR/$NAME.log \
