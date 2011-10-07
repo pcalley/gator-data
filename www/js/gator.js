@@ -325,7 +325,7 @@ jQuery(document).ready(function() {
                 readers_to_show.push('prippdb_experimental');
             }
         }
-        if (rendering_readers && rendering_readers.length === 0) {
+        if (rendering_readers) {
             readers_to_show.forEach(function(lay) {
                 MASCP.renderer.showLayer(lay,true);
             });
@@ -349,33 +349,8 @@ jQuery(document).ready(function() {
     // }
     
     var rrend = function(e,reader) {
-        if (rendering_readers && rendering_readers.length > 0) {
-            var an_index =rendering_readers.indexOf(reader);
-            if (an_index >= 0) {
-                rendering_readers.splice(an_index,1);
-            }
-            if (rendering_readers.length > 0) {                
-                return;
-            }
-        }
-
-        if (! rendering_readers) {
-            return;
-            
-        }
-
-        setTimeout(function() {
-            jQuery('#agi').focus();            
-        },1000);
-
-        
-        if (document._screen) {
-            document._screen.hide();
-        }
                 
         MASCP.renderer.trackOrder = tweak_track_order([]);
-
-        rendering_readers = null;
 
     };
 
@@ -432,7 +407,36 @@ jQuery(document).ready(function() {
                 }
             }
         }
+        var complete_function = function() {
+            if (rendering_readers && rendering_readers.length > 0) {
+                var an_index = rendering_readers.indexOf(this);
+                if (an_index >= 0) {
+                    rendering_readers.splice(an_index,1);
+                }
+                if (rendering_readers.length > 0) {                
+                    return;
+                }
+            }
 
+            if (! rendering_readers) {
+                return;
+
+            }
+            
+            setTimeout(function() {
+                jQuery('#agi').focus();            
+            },1000);
+
+
+            if (document._screen) {
+                document._screen.hide();
+            }    
+
+            rendering_readers = null;
+
+                    
+        };
+        
         var result_function = function() {
             var self_func = arguments.callee;
             var an_agi = this.agi;
@@ -516,7 +520,7 @@ jQuery(document).ready(function() {
             this.bind('error',error_function);
 
             this.bind('resultReceived',result_function);
-        
+            this.bind('requestComplete', complete_function);
             this.retrieve();
         });
     
