@@ -44,8 +44,6 @@ Node.js:
 NPM:
 
     sudo true && curl http://npmjs.org/install.sh | sudo sh
-    sudo npm install connect connect_json move
-
 
 ## Checkout your source
 
@@ -54,15 +52,11 @@ NPM:
 
 If your git repository is public (i.e. viewable by anyone):
 
-    sudo -Hu www-data git clone https://github.com/you/gatordata.git /var/gatordata
-
-If your git repository is private:
-
-    sudo -Hu www-data ssh-keygen -t rsa  # chose "no passphrase"
-    sudo cat /var/www/.ssh/id_rsa.pub
-    # Add the key as a "deploy key" at https://github.com/you/gatordata/admin
-    sudo -Hu www-data git clone git@github.com:you/gatordata.git /var/gatordata
-
+    sudo -Hu www-data git clone https://hirenj@github.com/hirenj/gator-data.git /var/gatordata
+    
+    cd /var/gatordata
+    
+    sudo -Hu www-data npm install
 
 ## Configure & start your services
 
