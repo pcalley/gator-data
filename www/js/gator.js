@@ -284,29 +284,34 @@ jQuery(document).ready(function() {
             }
             for (var rdr_id in READER_CONF) {
                 if (READER_CONF.hasOwnProperty(rdr_id)) {
-                    var rdr = READER_CONF[rdr_id],i;
+                    var rdr = READER_CONF[rdr_id], i;
+                    var layers = rdr.layers;
                     if (! rdr.placeholder) {
-                        if (rdr.layers.length > 0) {
-                            if (array.indexOf(rdr.layers[0]) == -1) {
-                                for (i = 0 ; i < rdr.layers.length; i++) {
-                                    readers_to_show.push(rdr.layers[i]);
-                                    array.push(rdr.layers[i]);
+                        if (layers.length > 0) {
+                            if (array.indexOf(layers[0]) == -1) {
+                                for (i = 0 ; i < layers.length; i++) {
+                                    readers_to_show.push(layers[i]);
+                                    array.push(layers[i]);
                                 }
                             }                            
                         }
                         continue;
                     }
-                    for (i = 0; i < rdr.layers.length; i++) {
-                        var lay = rdr.layers[i];
+                    for (i = 0; i < layers.length; i++) {
+                        var lay = layers[i];
                         var placeholder = lay.replace(/_.*$/,'') + '_placeholder';
                         var controller = lay.replace(/_.*$/,'') + '_controller';
                     
                         if (array.indexOf(placeholder) === -1) {
                             array.push(placeholder);
                         }
-                    
                         if (MASCP.getGroup(lay) && MASCP.getGroup(lay).size() > 0) {
                             array.splice(array.indexOf(placeholder),1,controller,lay);
+                            MASCP.getGroup(lay).eachLayer(function(group_lay) {
+                                if (MASCP.getGroup(group_lay.name)) {
+                                    layers.splice(i+1,0,group_lay.name);
+                                }
+                            });
                             readers_to_show.push(controller);
                         } else {
                             array.splice(array.indexOf(placeholder),1,lay);                        
