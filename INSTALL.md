@@ -49,6 +49,7 @@ NPM:
 
     sudo mkdir /var/gatordata
     sudo chown www-data:www-data /var/gatordata
+    sudo chown -R www-data:www-data /var/gatordata
 
 If your git repository is public (i.e. viewable by anyone):
 
@@ -58,7 +59,9 @@ If your git repository is public (i.e. viewable by anyone):
     
     sudo -Hu www-data npm install
 
-    sudo -Hu www-data sqlite3 -init cached.db "select *"
+    sudo apt-get install sqlite3
+    
+    sudo -Hu www-data sqlite3 cached.db "select *"
 
 ## Configure & start your services
 
