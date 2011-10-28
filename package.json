@@ -31,13 +31,13 @@
        "express" : "2.4.x",
        "optimist": "0.2.x",
        "carrier" : "0.1.x",
-       "mascp-jstools" : "https://github.com/hirenj/mascp-jstools/tarball/develop"
+       "mascp-jstools" : "https://github.com/hirenj/mascp-jstools/tarball/mascp-jstools-2.0"
    },
    "main" : "bin/gatordata-httpd",
    "bin" : {
        "httpd" : "bin/gator-httpd"
    },
-   "implements": ["mascp-jstools-1.0","cli"],
+   "implements": ["gatordata-httpd"],
    "os": ["linux", "macos", "win"],
    "cpu": ["x86", "ppc", "x86_64"],
    "engines": ["v8", "node >= 0.4.11"],
