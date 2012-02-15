@@ -31,10 +31,13 @@ when you're trying to bootstrap your own install of GATOR
     curl --silent 'https://s3.amazonaws.com/gator-data/MASCP.PpdbReader-11-10-04.txt' | bin/data-manager.js --reader MASCP.PpdbReader --date 2011/10/04
     curl --silent 'https://s3.amazonaws.com/gator-data/MASCP.RippdbReader.txt' | bin/data-manager.js --reader MASCP.RippdbReader
     curl --silent 'https://s3.amazonaws.com/gator-data/MASCP.SubaReader-11-09-30.txt' | bin/data-manager.js --reader MASCP.SubaReader --date 2011/09/30
-    
+    curl --silent 'https://s3.amazonaws.com/gator-data/MASCP.RnaEditReader-12-02-15.txt' | bin/data-manager.js --reader MASCP.RnaEditReader --date 2012/02/15
+    curl --silent 'https://s3.amazonaws.com/gator-data/MASCP.ProcessingReader-12-02-15.txt' | bin/data-manager.js --reader MASCP.ProcessingReader --date 2012/02/15
+    curl --silent 'https://s3.amazonaws.com/gator-data/MASCP.UbiquitinReader-12-02-15.txt' | bin/data-manager.js --reader MASCP.UbiquitinReader --date 2012/02/15
+
 If you're loading this on an EC2 instance, you'll need to sudo to do this:
 
-    curl --silent ... | sudo su www-data -c "bin/data-manager.js --reader ..."
+    curl --silent ... | sudo -Hu www-data bin/data-manager.js --reader ...
     
 For more options for reading data dump files see
 
