@@ -331,6 +331,12 @@ jQuery(document).ready(function() {
                 array.splice(array.indexOf('prippdb_experimental')+1,0,'prippdb_peptides');                                                
                 readers_to_show.push('prippdb_experimental');
             }
+
+            if (MASCP.getGroup('ubiquitin_peptides') && MASCP.getGroup('ubiquitin_peptides').size() > 0) {
+                array.splice(array.indexOf('ubiquitin_experimental')+1,0,'ubiquitin_peptides');                                                
+                readers_to_show.push('ubiquitin_experimental');
+            }
+
         }
         if (rendering_readers) {
             readers_to_show.forEach(function(lay) {

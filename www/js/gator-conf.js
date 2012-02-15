@@ -252,5 +252,11 @@ var READER_CONF = (function() {
         'nicename'      : 'Rna Edits',
         'result'        : function() {},
         'layers'        : ['rnaedit']
+    },
+    MASCP.UbiquitinReader, {
+        'definition'    : MASCP.UbiquitinReader,
+        'nicename'      : 'Ubiquitin',
+        'result'        : function() {},
+        'layers'        : ['ubiquitin_experimental']
     }
 );

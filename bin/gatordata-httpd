@@ -21,7 +21,8 @@ var resource_map = {
     'suba'      : MASCP.SubaReader,
     'ArbitraryData' : MASCP.ArbitraryDataReader,
     'rnaedit'   : MASCP.RnaEditReader,
-    'nssnps'    : MASCP.SnpReader    
+    'ubiquitin' : MASCP.UbiquitinReader,
+    'nssnps'    : MASCP.SnpReader,
 };
 
 repl = require('repl');
