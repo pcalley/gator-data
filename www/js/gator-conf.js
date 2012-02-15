@@ -246,5 +246,11 @@ var READER_CONF = (function() {
         'result'        : function() {            
         },
         'layers'        : ['insertions_controller','insertions']
+    },
+    MASCP.RnaEditReader, {
+        'definition'    : MASCP.RnaEditReader,
+        'nicename'      : 'Rna Edits',
+        'result'        : function() {},
+        'layers'        : ['rnaedit']
     }
 );

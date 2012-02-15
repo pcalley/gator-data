@@ -20,6 +20,7 @@ var resource_map = {
     'rippdb'    : MASCP.RippdbReader,
     'suba'      : MASCP.SubaReader,
     'ArbitraryData' : MASCP.ArbitraryDataReader,
+    'rnaedit'   : MASCP.RnaEditReader,
     'nssnps'    : MASCP.SnpReader    
 };
 
