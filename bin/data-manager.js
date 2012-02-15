@@ -44,12 +44,12 @@ var read_csv = function(filename) {
 
 var get_stdin = function(cback,endcback) {
     process.stdin.resume();
-    process.stdin.on('end',function() {
-        endcback();
+    process.stdin.on('end',function(line) {
+        setTimeout(endcback,100);
     });
     carrier.carry(process.stdin,function(line) {
         cback.call(null,line.split(/,(.+)/));
-    })
+    });
 };
 MASCP = require('mascp-jstools');
 MASCP.events.once('ready',function() {
