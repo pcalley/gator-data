@@ -258,5 +258,12 @@ var READER_CONF = (function() {
         'nicename'      : 'Ubiquitin',
         'result'        : function() {},
         'layers'        : ['ubiquitin_experimental']
+    },
+    MASCP.ProcessingReader, {
+        'definition'    : MASCP.ProcessingReader,
+        'nicename'      : 'Processing',
+        'result'        : function() {},
+        'layers'        : ['processing']
     }
+
 );

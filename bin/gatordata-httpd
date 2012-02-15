@@ -22,6 +22,7 @@ var resource_map = {
     'ArbitraryData' : MASCP.ArbitraryDataReader,
     'rnaedit'   : MASCP.RnaEditReader,
     'ubiquitin' : MASCP.UbiquitinReader,
+    'processing': MASCP.ProcessingReader,
     'nssnps'    : MASCP.SnpReader,
 };
 
