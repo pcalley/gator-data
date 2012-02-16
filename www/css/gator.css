@@ -325,6 +325,7 @@ h1, h2 {
         width: 45%;
         left: 20px;
         height: 100%;
+        min-height: 100px;
         overflow: auto;
         padding-bottom: 20px;
         padding-right: 20px;
@@ -341,6 +342,7 @@ h1, h2 {
         overflow: auto;
         padding-bottom: 20px;
         padding-right: 20px;
+        min-height: 100px;
     }
     
     #suba_controller {
@@ -362,15 +364,17 @@ h1, h2 {
         top: 10px;
         margin-right: 20px;
         margin-left: 20px;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
     }
     
     #links li {
         list-style-type: none;
         display: block;
         float: left;
-        width: 200px;
+        width: 150px;
         position: relative;
-        height: 64px;
+        height: 32px;
         background-image: url(img/green.png);
         background-repeat: no-repeat;
         background-position: left center;
@@ -378,9 +382,9 @@ h1, h2 {
     
     #links li span.timestamp {
         position: absolute;
-        top: 0px;
-        right: 0px;
-        font-size: 12px;
+        bottom: -10px;
+        left: 16px;
+        font-size: 8px;
         color: #777777;
     }
     
@@ -388,9 +392,9 @@ h1, h2 {
         position: relative;
         display: block;
         top: 0px;
-        margin-left: 64px;
-        margin-top: 20px;
-        font-size: 20px;
+        margin-left: 20px;
+        margin-top: 10px;
+        font-size: 12px;
         color: #000000 !important;
         text-decoration: none;
     }
