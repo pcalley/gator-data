@@ -80,51 +80,6 @@ var READER_CONF = (function() {
                         },
         'layers'        : []
     },
-    MASCP.PhosphatReader , {
-        'definition'    : MASCP.PhosphatReader,
-        'nicename'      : 'PhosPhAt',
-        'error_url'     : 'http://phosphat.mpimp-golm.mpg.de',
-        'success_url'   : 'http://phosphat.mpimp-golm.mpg.de/app.html?agi=',
-        'result'        : function() {
-                            if (this.result.getAllExperimentalPositions().length > 0) {                 
-                                jQuery('#phosphat_experimental').show();
-                                MASCP.renderer.showLayer('phosphat_experimental');
-                            } else if (this.result.getAllPredictedPositions().length > 0) {
-                                jQuery('#phosphat_theoretical').show();                 
-                            }
-                            var tissues = this.result.getSpectra();
-                            var loc_key = null;
-                            for (loc_key in tissues) {
-                                if (tissues.hasOwnProperty(loc_key)) {
-                                    var long_name = loc_key;
-                                    var count = tissues[loc_key];
-                                    document.getElementById('tissue_results').updateKey(long_name,count);
-                                }
-                            }
-                            document.getElementById('tissue_tags').updateTags();
-                        },
-        'layers'        : ['phosphat_experimental']
-    },
-    MASCP.RippdbReader ,  {
-        'definition'    :  MASCP.RippdbReader,
-        'nicename'      : 'RIPP-DB',
-        'error_url'     : 'https://database.riken.jp/sw/links/en/ria102i/',
-        'success_url'   : 'https://database.riken.jp/sw/links/en/ria102i/?refagi=',
-        'result'        :  function() {
-                            if (this.result.getSpectra().length > 0) {                 
-                                jQuery('#prippdb_experimental').show();
-                                MASCP.renderer.showLayer('prippdb_experimental');
-                            }
-                        },
-        'layers'        : ['prippdb_experimental']
-    },
-    MASCP.ArbitraryDataReader , {
-        'definition'    : MASCP.ArbitraryDataReader,
-        'nicename'      : 'Other data',
-        'result'        : function() {},
-        'placeholder'   : true,
-        'layers'        : ['arbitrary_datasets']
-    },
     MASCP.PromexReader, { 
         'definition'    : MASCP.PromexReader,
         'nicename'      : 'ProMEX',
@@ -138,7 +93,7 @@ var READER_CONF = (function() {
         'layers'        : ['promex_experimental'],
         'placeholder'   : true
     },
-    MASCP.InterproReader, { 
+    /*MASCP.InterproReader, { 
         'definition'    : MASCP.InterproReader,
         'nicename'      : 'Interpro',
         'error_url'     : 'http://www.ebi.ac.uk/interpro/',
@@ -148,19 +103,13 @@ var READER_CONF = (function() {
                         },
         'layers'        : ['interpro_domains'],
         'placeholder'   : true
-    },
-    MASCP.PpdbReader, {
-        'definition'    : MASCP.PpdbReader,
-        'nicename'      : 'PPDB',
-        'error_url'     : 'http://ppdb.tc.cornell.edu',
-        'success_url'   : 'http://ppdb.tc.cornell.edu/?refagi=',
-        'result'        : function() {
-                                if (this.result.getPeptides().length > 0) {
-                                    jQuery('#ppdb_placeholder').show();
-                                }
-                            },
-        'layers'        : ['ppdb'],
-        'placeholder'   : true
+    },*/
+    MASCP.ArbitraryDataReader , {
+        'definition'    : MASCP.ArbitraryDataReader,
+        'nicename'      : 'Other data',
+        'result'        : function() {},
+        'placeholder'   : true,
+        'layers'        : ['arbitrary_datasets']
     },
     MASCP.GelMapReader, { 
         'definition'    : MASCP.GelMapReader,
@@ -230,6 +179,72 @@ var READER_CONF = (function() {
         'layers'        : ['pep2pro'],
         'placeholder'   : true
     },
+    MASCP.PpdbReader, {
+        'definition'    : MASCP.PpdbReader,
+        'nicename'      : 'PPDB',
+        'error_url'     : 'http://ppdb.tc.cornell.edu',
+        'success_url'   : 'http://ppdb.tc.cornell.edu/?refagi=',
+        'result'        : function() {
+                                if (this.result.getPeptides().length > 0) {
+                                    jQuery('#ppdb_placeholder').show();
+                                }
+                            },
+        'layers'        : ['ppdb'],
+        'placeholder'   : true
+    },
+    MASCP.SnpReader, {
+        'definition'    : MASCP.SnpReader,
+        'nicename'      : 'Snps',
+        'result'        : function() {            
+        },
+        'error_url'     : 'http://1001proteomes.masc-proteomics.org/',
+        'success_url'   : 'http://1001proteomes.masc-proteomics.org/##',        
+        'layers'        : ['insertions_controller']
+    },
+    MASCP.RnaEditReader, {
+        'definition'    : MASCP.RnaEditReader,
+        'nicename'      : 'Rna Edits',
+        'result'        : function() {},
+        'layers'        : ['rnaedit']
+    },
+    MASCP.PhosphatReader , {
+        'definition'    : MASCP.PhosphatReader,
+        'nicename'      : 'PhosPhAt',
+        'error_url'     : 'http://phosphat.mpimp-golm.mpg.de',
+        'success_url'   : 'http://phosphat.mpimp-golm.mpg.de/app.html?agi=',
+        'result'        : function() {
+                            if (this.result.getAllExperimentalPositions().length > 0) {                 
+                                jQuery('#phosphat_experimental').show();
+                                MASCP.renderer.showLayer('phosphat_experimental');
+                            } else if (this.result.getAllPredictedPositions().length > 0) {
+                                jQuery('#phosphat_theoretical').show();                 
+                            }
+                            var tissues = this.result.getSpectra();
+                            var loc_key = null;
+                            for (loc_key in tissues) {
+                                if (tissues.hasOwnProperty(loc_key)) {
+                                    var long_name = loc_key;
+                                    var count = tissues[loc_key];
+                                    document.getElementById('tissue_results').updateKey(long_name,count);
+                                }
+                            }
+                            document.getElementById('tissue_tags').updateTags();
+                        },
+        'layers'        : ['phosphat_experimental']
+    },
+    MASCP.RippdbReader ,  {
+        'definition'    :  MASCP.RippdbReader,
+        'nicename'      : 'RIPP-DB',
+        'error_url'     : 'https://database.riken.jp/sw/links/en/ria102i/',
+        'success_url'   : 'https://database.riken.jp/sw/links/en/ria102i/?refagi=',
+        'result'        :  function() {
+                            if (this.result.getSpectra().length > 0) {                 
+                                jQuery('#prippdb_experimental').show();
+                                MASCP.renderer.showLayer('prippdb_experimental');
+                            }
+                        },
+        'layers'        : ['prippdb_experimental']
+    },
     MASCP.P3dbReader, {
         'definition'    : MASCP.P3dbReader,
         'nicename'      : 'P3DB',
@@ -239,19 +254,6 @@ var READER_CONF = (function() {
                           },
         'layers'        : ['p3db_experimental'],
         'placeholder'   : true
-    },
-    MASCP.SnpReader, {
-        'definition'    : MASCP.SnpReader,
-        'nicename'      : 'Snps',
-        'result'        : function() {            
-        },
-        'layers'        : ['insertions_controller','insertions']
-    },
-    MASCP.RnaEditReader, {
-        'definition'    : MASCP.RnaEditReader,
-        'nicename'      : 'Rna Edits',
-        'result'        : function() {},
-        'layers'        : ['rnaedit']
     },
     MASCP.UbiquitinReader, {
         'definition'    : MASCP.UbiquitinReader,
