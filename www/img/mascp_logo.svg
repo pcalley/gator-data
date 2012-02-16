@@ -102,9 +102,9 @@
     <use x="0" y="0" width="100%" height="100%" fill="#ffffff"  xlink:href="#ara_outline"/>
 </mask>
 
-<text transform="matrix(0.9389 -0.3442 0.3442 0.9389 23.2271 54.3887)"><tspan x="0" y="0" font-family="'Gill Sans'" font-size="37.6095">M</tspan><tspan x="28.055" y="0.095" font-family="'Gill Sans'" font-size="37.6095" rotate="12.449">A</tspan><tspan x="51.472" y="5.513" font-family="'Gill Sans'" font-size="37.6095" rotate="22.075">S</tspan><tspan x="66.683" y="11.14" font-family="'Gill Sans'" font-size="37.6095" rotate="32.068">C</tspan><tspan x="88.172" y="24.885" font-family="'Gill Sans'" font-size="37.6095" rotate="42.572">P</tspan></text>
+<text transform="matrix(0.9389 -0.3442 0.3442 0.9389 23.2271 54.3887)"><tspan x="0" y="0" font-family="'Gill Sans', Arial, sans-serif" font-size="37.6095">M</tspan><tspan x="28.055" y="0.095" font-family="'Gill Sans', Arial, sans-serif" font-size="37.6095" rotate="12.449">A</tspan><tspan x="51.472" y="5.513" font-family="'Gill Sans', Arial, sans-serif" font-size="37.6095" rotate="22.075">S</tspan><tspan x="66.683" y="11.14" font-family="'Gill Sans', Arial, sans-serif" font-size="37.6095" rotate="32.068">C</tspan><tspan x="88.172" y="24.885" font-family="'Gill Sans', Arial, sans-serif" font-size="37.6095" rotate="42.572">P</tspan></text>
 <g mask="url(#arabidopsis)">
-<rect x="0" y="0" width="100%" height="100%" fill="#B5CAF5"/>
+    <use x="0" y="0" width="100%" height="100%" fill="#B5CAF5" xlink:href="#ara_outline"/>
 <g filter="url(#blurxy)">
     <path fill-rule="evenodd" clip-rule="evenodd" fill="#091372" d="M21.546,99.112c-1.193,0.461-2.129-0.253-2.846,1.109
         c-0.594,1.126,0.14,2.501,0.824,3.333c1.977,2.397,3.725-0.412,5.578-2.041c-0.742-1.341-2.119-1.387-2.918-2.628
