@@ -34,7 +34,11 @@
 <div id="log" style="position: fixed; top: 0px; left: 0px;">
 </div>
 
-<a style="display: block; position: absolute; top: 10px; left: 10px; width: 90px; height: 68px;" href="http://www.masc-proteomics.org/" title="MASC Proteomics portal"><object width="100%" height="100%" data="img/mascp_logo.svg" type="image/svg+xml"><img style="border: 0px;" src="http://www.masc-proteomics.org/mascp/skins/common/images/mascp_logo.png"/></object></a>
+<a style="display: block; position: absolute; top: 10px; left: 10px; width: 90px; height: 68px;" href="http://www.masc-proteomics.org/" title="MASC Proteomics portal">
+<!--<object width="100%" height="100%" data="img/mascp_logo.svg" style="position: relative; z-index: -1;"type="image/svg+xml">-->
+  <img style="border: 0px;" src="http://www.masc-proteomics.org/mascp/skins/common/images/mascp_logo.png"/>
+<!--  </object>-->
+</a>
 <div id="agi_input" class="rounded_box" style="">
     <label class="inset" for="agi">AGI </label><input size="12" id="agi" type="text" name="agi" value="AT3G15450.1"/><a href="multiple.html" target="_new">Advanced</a><input type="button" value="Retrieve"/>
 </div>
@@ -57,7 +61,7 @@
 <div style="top: 100px; position: relative; height: 2em;">
 <div id="zoomlabel">Zoom</div>
 <input id="zoomout" value="–" type="button"/><input id="zoomin" value="+" type="button"/>
-<span id="search_box"><label for="search">Search:</label><input id="search" type="search"/></span>
+<span id="search_box"><label for="search">Peptide:</label><input id="search" type="search"/></span>
 </div>
 <div style="position: relative; top: 100px; padding-bottom: 50px;">
 <div>
