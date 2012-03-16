@@ -165,7 +165,7 @@
                                 data_points.push(idx);
                               }
                             } else {
-                              while( data_points.indexOf(idx) > 0) {
+                              while( data_points.indexOf(idx) >= 0 ) {
                                 data_points.splice(data_points.indexOf(idx),1);
                               }
                             }
