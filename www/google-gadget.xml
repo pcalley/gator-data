@@ -5,6 +5,10 @@
     name="sheet" 
     display_name="Sheet" 
     required="true" />
+    <UserPref 
+     name="formkey" 
+     display_name="Form key" 
+     required="true" />
   <Content type="html">
     <![CDATA[
           <script type="text/javascript" src="http://gator.masc-proteomics.org/js/mascp-jstools.min.js"></script>
