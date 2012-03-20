@@ -16,6 +16,10 @@
           <script type="text/javascript" src="http://gator.masc-proteomics.org/js/jquery-ui-1.7.2.min.js"></script>
           <script type="text/javascript" src="http://gator.masc-proteomics.org/js/jquery-masonry-1.2.0.min.js"></script>
           <style type="text/css">
+          .seen:after {
+            font-size: 32px;
+            content:  ' ✔ (viewed)';
+          }
           #zoomin, #zoomout {
               font-weight: bolder;
               font-family: Helvetica;
@@ -51,6 +55,7 @@
           </style>
       <h2 id="label"></h2>
       <p><h3>My name is: </h3><input id="user" type="text" value="Anonymous"/></p>
+          <input type="button" value="Back to first" onclick="show_data(2);"/>
           <input type="button" value="Next" id="next" onclick="show_data(state+1);"/>
           <div style="position: relative; height: 2em;">
               <div id="zoomlabel">Zoom</div>
@@ -74,7 +79,7 @@
 </script>
 <script>
 window.svgns = 'http://www.w3.org/2000/svg';
-state = 2;
+state = parseInt(localStorage["state"] || "2");
 var widget_rend = new MASCP.CondensedSequenceRenderer(document.getElementById('condensed_container'));
 var dragger = new GOMap.Diagram.Dragger();
 widget_rend.zoom = 0.81;
@@ -125,6 +130,13 @@ var prefs = new gadgets.Prefs();
 var formkey = prefs.getString("formkey");
 
 function show_data(index) {
+    var seen  = localStorage[document.getElementById('user').value+"-seen"] || "";
+    var seen_ids = seen.split(/,/);
+    if (seen_ids.indexOf(""+state) < 0) {
+        seen_ids.push(""+state);
+    }
+    localStorage[document.getElementById('user').value+"-seen"] = seen_ids.join(",");
+  
     if (data_points.length > 0) {
         document.getElementById('submitter').
         setAttribute('src',
@@ -145,11 +157,16 @@ function show_data(index) {
     }
     data_points = [];
     state = parseInt(index);
+    localStorage["state"] = ""+state;
     var dat = ss_data[index];
     var titles = ss_data.titles;
     var title = dat[titles["title_name"]];
     document.getElementById('label').innerHTML = title;
-
+    if (seen_ids.indexOf(""+index) >= 0) {
+      document.getElementById('label').className = "seen";
+    } else {
+      document.getElementById('label').className = "";            
+    }
     var seq = dat[titles["sequence"]];
     var window = dat[titles["track_window"]].replace(/\*/g,'');
     var is_new_sequence = false;
