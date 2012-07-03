@@ -1,4 +1,4 @@
-MASCP.Service.BeginCaching();
+// MASCP.Service.BeginCaching();
 
 MASCP.BatchRead = function()
 {

@@ -107,7 +107,11 @@ var READER_CONF = (function() {
     MASCP.ArbitraryDataReader , {
         'definition'    : MASCP.ArbitraryDataReader,
         'nicename'      : 'Other data',
-        'result'        : function() {},
+        'result'        : function() {
+								 if (this.result.getPeptides().length > 0) {
+                                    jQuery('#arbitrary_controller').show();
+                                 }
+						  },
         'placeholder'   : true,
         'layers'        : ['arbitrary_datasets']
     },
@@ -190,6 +194,19 @@ var READER_CONF = (function() {
                                 }
                             },
         'layers'        : ['ppdb'],
+        'placeholder'   : true
+    },
+	MASCP.ProteotypicReader, {
+        'definition'    : MASCP.ProteotypicReader,
+        'nicename'      : 'Proteotypic',
+        'error_url'     : '',
+        'success_url'   : '',
+        'result'        : function() {
+								if (this.result.getPeptides().length > 0) {
+                                    jQuery('#proteotypic_placeholder').show();
+                                }
+                            },
+        'layers'        : ['proteotypic_experimental'],
         'placeholder'   : true
     },
     MASCP.SnpReader, {
