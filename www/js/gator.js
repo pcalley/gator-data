@@ -9,7 +9,7 @@ jQuery(document).ready(function() {
         }
     }
 
-    MASCP.Service.BeginCaching();
+  //  MASCP.Service.BeginCaching();
     
     (function() {
         var onemonthago = new Date();
@@ -545,5 +545,5 @@ jQuery(document).ready(function() {
     
     jQuery(MASCP.renderer).bind('resultsRendered',rrend);
     jQuery(MASCP.renderer).bind('sequenceChange',seqchange);
-    
+ 
 });

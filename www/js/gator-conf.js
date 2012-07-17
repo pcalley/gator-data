@@ -192,6 +192,19 @@ var READER_CONF = (function() {
         'layers'        : ['ppdb'],
         'placeholder'   : true
     },
+    MASCP.PubmedReader, {
+        'definition'    : MASCP.PubmedReader,
+        'nicename'      : 'Pubmed',
+        'error_url'     : 'http://ppdb.tc.cornell.edu',
+        'success_url'   : 'http://ppdb.tc.cornell.edu/?refagi=',
+        'result'        : function() {
+                                if (this.result.getPeptides().length > 0) {
+                                    jQuery('#pubmed_placeholder').show();
+                                }
+                            },
+        'layers'        : ['pubmed'],
+        'placeholder'   : true
+    },
     MASCP.SnpReader, {
         'definition'    : MASCP.SnpReader,
         'nicename'      : 'Snps',

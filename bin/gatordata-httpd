@@ -12,6 +12,7 @@ var resource_map = {
     'atpeptide' : MASCP.AtPeptideReader,
     'pep2pro'   : MASCP.Pep2ProReader,
     'gelmap'    : MASCP.GelMapReader,
+    'pubmed'    : MASCP.PubmedReader,
     'interpro'  : MASCP.InterproReader,
     'p3db'      : MASCP.P3dbReader,
     'phosphat'  : MASCP.PhosphatReader,
