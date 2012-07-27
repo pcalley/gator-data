@@ -19,6 +19,7 @@ var resource_map = {
     'ppdb'      : MASCP.PpdbReader,
     'promex'    : MASCP.PromexReader,
     'rippdb'    : MASCP.RippdbReader,
+    'glycomod'  : MASCP.GlycoModReader,
     'suba'      : MASCP.SubaReader,
     'ArbitraryData' : MASCP.ArbitraryDataReader,
     'rnaedit'   : MASCP.RnaEditReader,
