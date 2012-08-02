@@ -9,7 +9,7 @@ jQuery(document).ready(function() {
         }
     }
 
-    // MASCP.Service.BeginCaching();
+    MASCP.Service.BeginCaching();
     
     (function() {
         var onemonthago = new Date();
@@ -284,6 +284,9 @@ jQuery(document).ready(function() {
             if (array.indexOf('hydropathy') === -1) {
                 array.push('hydropathy');
             }
+            if (array.indexOf('modhunter') === -1) {
+                array.push('modhunter');
+            }
             for (var rdr_id in READER_CONF) {
                 if (READER_CONF.hasOwnProperty(rdr_id)) {
                     var rdr = READER_CONF[rdr_id], i;
@@ -381,7 +384,7 @@ jQuery(document).ready(function() {
             MASCP.renderer.showLayer('hydropathy');
             jQuery('#hydropathy').show();
         }
-    
+
         jQuery('#tissue_results').text('').append('<div><table id="tissue_tags"><thead><tr><th>tag</th><th>Experiment count</th></tr></thead><tbody></tbody></table></div>');
         document.getElementById('tissue_tags').updateTags = updateTags;
 
@@ -420,6 +423,13 @@ jQuery(document).ready(function() {
                 }
             }
         }
+
+        if (MASCP.renderer.createModhunterLayer) {
+            MASCP.renderer.createModhunterLayer();
+            MASCP.renderer.showLayer('modhunter');
+            jQuery('#modhunter').show();
+        }
+
         var complete_function = function() {
             if (rendering_readers && rendering_readers.length > 0) {
                 var an_index = rendering_readers.indexOf(this);
@@ -444,10 +454,13 @@ jQuery(document).ready(function() {
             if (document._screen) {
                 document._screen.hide();
             }    
-
+            
             rendering_readers = null;
 
-                    
+            if (MASCP.renderer.setModhunterGradient) {
+                MASCP.renderer.setModhunterGradient();
+            }
+
         };
         
         var result_function = function() {
