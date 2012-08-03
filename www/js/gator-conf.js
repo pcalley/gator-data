@@ -258,19 +258,6 @@ var READER_CONF = (function() {
                         },
         'layers'        : ['prippdb_experimental']
     },
-    MASCP.GlycoModReader ,  {
-        'definition'    :  MASCP.GlycoModReader,
-        'nicename'      : 'GlycoMod',
-        'error_url'     : 'https://database.riken.jp/sw/links/en/ria102i/',
-        'success_url'   : 'https://database.riken.jp/sw/links/en/ria102i/?refagi=',
-        'result'        :  function() {
-                            if (this.result.getPeptides().length > 0) {                 
-                                jQuery('#glycomod_experimental').show();
-                                MASCP.renderer.showLayer('glycomod_experimental');
-                            }
-                        },
-        'layers'        : ['glycomod_experimental']
-    },
     MASCP.P3dbReader, {
         'definition'    : MASCP.P3dbReader,
         'nicename'      : 'P3DB',
