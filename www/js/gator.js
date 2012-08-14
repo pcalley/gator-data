@@ -558,5 +558,5 @@ jQuery(document).ready(function() {
     
     jQuery(MASCP.renderer).bind('resultsRendered',rrend);
     jQuery(MASCP.renderer).bind('sequenceChange',seqchange);
-    
+ 
 });

@@ -13,6 +13,7 @@ var resource_map = {
     'pep2pro'   : MASCP.Pep2ProReader,
     'gelmap'    : MASCP.GelMapReader,
     'glycomod'  : MASCP.GlycoModReader,
+    'pubmed'    : MASCP.PubmedReader,
     'interpro'  : MASCP.InterproReader,
     'p3db'      : MASCP.P3dbReader,
     'phosphat'  : MASCP.PhosphatReader,
